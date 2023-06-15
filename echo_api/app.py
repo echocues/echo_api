@@ -12,6 +12,7 @@ tags_metadata = [
     {"name": "create", "description": "All *create* operations."},
 ]
 
+# noinspection PyArgumentEqualDefault
 app = FastAPI(
     title="EchoCues API",
     version="0.1.0",

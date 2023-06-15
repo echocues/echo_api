@@ -1,13 +1,12 @@
-from __future__ import annotations
-
 import os
-from typing import Annotated
+from typing import Annotated, Optional
 
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 
+# noinspection PyPackageRequirements
 from jose import jwt, JWTError
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
@@ -29,7 +28,7 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta

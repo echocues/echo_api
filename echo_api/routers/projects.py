@@ -18,6 +18,4 @@ async def create_project(
 async def get_project(
     project_id: int, db: database.db_depends, current_user: auth.user_depends
 ):
-    project = await crud.get_project(db, project_id)
-
     return await crud.get_project(db, project_id)

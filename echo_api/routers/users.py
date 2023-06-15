@@ -1,7 +1,4 @@
-from typing import Annotated
-
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, HTTPException
 
 from echo_api import crud, schemas, database
 

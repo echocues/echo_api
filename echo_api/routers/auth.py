@@ -1,15 +1,13 @@
-import echo_api
-from echo_api import schemas, database
+from datetime import timedelta
+from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from datetime import timedelta
-from typing import Annotated
-
+import echo_api
+from echo_api import schemas, database
 from echo_api.auth import (
     ACCESS_TOKEN_EXPIRE_MINUTES,
-    get_current_user,
     authenticate_user,
 )
 

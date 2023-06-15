@@ -1,7 +1,7 @@
-from echo_api.database import Base
-
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import String, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
+
+from echo_api.database import Base
 
 __all__ = ("Project",)
 
