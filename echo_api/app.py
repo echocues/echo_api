@@ -1,4 +1,4 @@
-from echo_api import routers
+from echo_api import routers, database
 from fastapi import FastAPI
 
 tags_metadata = [
@@ -23,3 +23,9 @@ app = FastAPI(
 app.include_router(routers.users, prefix="/users")
 app.include_router(routers.auth, prefix="/auth")
 app.include_router(routers.projects, prefix="/projects")
+
+
+@app.on_event("startup")
+async def startup():
+    async with database.engine.begin() as conn:
+        await conn.run_sync(database.Base.metadata.create_all)
