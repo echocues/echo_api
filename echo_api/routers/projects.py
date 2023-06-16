@@ -16,6 +16,9 @@ async def create_project(
 
 @projects.get("/{project_id}", response_model=schemas.Project, tags=["projects", "get"])
 async def get_project(
-    project_id: int, db: database.db_depends, current_user: auth.user_depends
+        project_id: int, db: database.db_depends, current_user: auth.user_depends
 ):
+    project = await crud.get_project(db, project_id)
+    if current_user.id != project.owner_id:
+        raise HTTPException(status_code=403, detail="You are not authorized to view this project.")
     return await crud.get_project(db, project_id)
