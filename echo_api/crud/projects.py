@@ -6,8 +6,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 __all__ = "get_projects", "get_project", "create_project"
 
 
-async def get_projects(db: AsyncSession, skip: int = 0, limit: int = 100):
-    return db.query(database.Project).offset(skip).limit(limit).all()
+async def get_projects(db: AsyncSession, owner_id: int, skip: int = 0, limit: int = 100):
+    results = await db.scalars(
+        select(database.Project).filter(database.Project.owner_id == owner_id).offset(skip).limit(limit)
+    )
+    return results.all()
 
 
 async def get_project(db: AsyncSession, project_id: int):
