@@ -1,1 +1,1 @@
-uvicorn echo_api.app:app --reload
+SECRET_KEY=echo uvicorn echo_api.app:app --reload
