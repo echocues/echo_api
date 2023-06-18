@@ -1,17 +1,8 @@
-from typing import Annotated
+from typing import Annotated, AsyncGenerator
 
 from fastapi import Depends
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
-
-__all__ = (
-    "SQLALCHEMY_DATABASE_URL",
-    "engine",
-    "SessionLocal",
-    "Base",
-    "get_db",
-    "db_depends",
-)
 
 SQLALCHEMY_DATABASE_URL = "sqlite+aiosqlite:///./test.db"
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
@@ -26,7 +17,7 @@ class Base(DeclarativeBase):
     pass
 
 
-async def get_db() -> AsyncSession:
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
     db = SessionLocal()
     try:
         yield db

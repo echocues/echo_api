@@ -1,5 +1,6 @@
-from echo_api import routers, database
 from fastapi import FastAPI
+
+from echo_api import database, routers
 
 tags_metadata = [
     {"name": "users", "description": "Operations with users."},
@@ -21,12 +22,12 @@ app = FastAPI(
     openapi_tags=tags_metadata,
 )
 
-app.include_router(routers.users, prefix="/users")
-app.include_router(routers.auth, prefix="/auth")
-app.include_router(routers.projects, prefix="/projects")
+app.include_router(routers.users_router, prefix="/users")
+app.include_router(routers.auth_router, prefix="/auth")
+app.include_router(routers.projects_router, prefix="/projects")
 
 
 @app.on_event("startup")
-async def startup():
+async def startup() -> None:
     async with database.engine.begin() as conn:
         await conn.run_sync(database.Base.metadata.create_all)

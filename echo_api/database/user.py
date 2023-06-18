@@ -1,8 +1,11 @@
+from typing import TYPE_CHECKING
+
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from echo_api.database import Base
 
-from sqlalchemy.orm import relationship, Mapped, mapped_column
-
-__all__ = ("User",)
+if TYPE_CHECKING:
+    from .project import Project
 
 
 class User(Base):

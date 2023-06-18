@@ -1,23 +1,20 @@
 from datetime import timedelta
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 import echo_api
-from echo_api import schemas, database
-from echo_api.auth import (
-    ACCESS_TOKEN_EXPIRE_MINUTES,
-    authenticate_user,
-)
+from echo_api import database, schemas
+from echo_api.auth import ACCESS_TOKEN_EXPIRE_MINUTES, authenticate_user
 
-auth = APIRouter()
+auth_router: APIRouter = APIRouter()
 
 
-@auth.post("/token", response_model=schemas.Token, tags=["auth"])
+@auth_router.post("/token", response_model=schemas.Token, tags=["auth"])
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: database.db_depends
-):
+) -> schemas.Token:
     user = await authenticate_user(db, form_data.username, form_data.password)
     if user is None:
         raise HTTPException(
@@ -32,6 +29,6 @@ async def login_for_access_token(
     return schemas.Token(access_token=access_token, token_type="bearer")
 
 
-@auth.get("/me/", response_model=schemas.User, tags=["auth"])
-async def read_users_me(current_user: echo_api.auth.user_depends):
+@auth_router.get("/me/", response_model=schemas.User, tags=["auth"])
+async def read_users_me(current_user: echo_api.auth.user_depends) -> database.User:
     return current_user

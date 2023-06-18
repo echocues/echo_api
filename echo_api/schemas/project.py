@@ -1,7 +1,5 @@
 from pydantic import BaseModel
 
-__all__ = "Project", "ProjectCreate"
-
 
 class Project(BaseModel):
     id: int

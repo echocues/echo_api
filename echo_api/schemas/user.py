@@ -1,7 +1,5 @@
 from pydantic import BaseModel
 
-__all__ = "User", "UserCreate", "UserLogin"
-
 
 class User(BaseModel):
     id: int
