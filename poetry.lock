@@ -482,23 +482,6 @@ files = [
 ]
 
 [[package]]
-name = "isort"
-version = "5.12.0"
-description = "A Python utility / library to sort Python imports."
-optional = false
-python-versions = ">=3.8.0"
-files = [
-    {file = "isort-5.12.0-py3-none-any.whl", hash = "sha256:f84c2818376e66cf843d497486ea8fed8700b340f308f076c6fb1229dff318b6"},
-    {file = "isort-5.12.0.tar.gz", hash = "sha256:8bef7dde241278824a6d83f44a544709b065191b95b6e50894bdc722fcba0504"},
-]
-
-[package.extras]
-colors = ["colorama (>=0.4.3)"]
-pipfile-deprecated-finder = ["pip-shims (>=0.5.2)", "pipreqs", "requirementslib"]
-plugins = ["setuptools"]
-requirements-deprecated-finder = ["pip-api", "pipreqs"]
-
-[[package]]
 name = "mypy"
 version = "1.3.0"
 description = "Optional static typing for Python"
@@ -599,13 +582,13 @@ files = [
 
 [[package]]
 name = "platformdirs"
-version = "3.5.3"
+version = "3.6.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "platformdirs-3.5.3-py3-none-any.whl", hash = "sha256:0ade98a4895e87dc51d47151f7d2ec290365a585151d97b4d8d6312ed6132fed"},
-    {file = "platformdirs-3.5.3.tar.gz", hash = "sha256:e48fabd87db8f3a7df7150a4a5ea22c546ee8bc39bc2473244730d4b56d2cc4e"},
+    {file = "platformdirs-3.6.0-py3-none-any.whl", hash = "sha256:ffa199e3fbab8365778c4a10e1fbf1b9cd50707de826eb304b50e57ec0cc8d38"},
+    {file = "platformdirs-3.6.0.tar.gz", hash = "sha256:57e28820ca8094678b807ff529196506d7a21e17156cb1cddb3e74cebce54640"},
 ]
 
 [package.extras]
@@ -955,6 +938,42 @@ files = [
 ]
 
 [[package]]
+name = "types-passlib"
+version = "1.7.7.12"
+description = "Typing stubs for passlib"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-passlib-1.7.7.12.tar.gz", hash = "sha256:6abbf2400a8f1cba48639753e3a034af507a765489bb070974d7f68d9ceef883"},
+    {file = "types_passlib-1.7.7.12-py3-none-any.whl", hash = "sha256:7a4df64b53c2746f804aa29fb361974e5894e0df30ff18cf60b9518696ffc9d3"},
+]
+
+[[package]]
+name = "types-pyasn1"
+version = "0.4.0.5"
+description = "Typing stubs for pyasn1"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-pyasn1-0.4.0.5.tar.gz", hash = "sha256:d88aca717d15032a6e32050f473fbc73d880b81cb6408bfbea75a3a0bd43a0bd"},
+    {file = "types_pyasn1-0.4.0.5-py3-none-any.whl", hash = "sha256:c5d661b820922b9a99b984b6c2c051734b5ceaa8732206f7196055b5f799ddb6"},
+]
+
+[[package]]
+name = "types-python-jose"
+version = "3.3.4.7"
+description = "Typing stubs for python-jose"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-python-jose-3.3.4.7.tar.gz", hash = "sha256:33c033d313a02457b09874a7e516c75da2538069ffe30f779968482bd6f3b123"},
+    {file = "types_python_jose-3.3.4.7-py3-none-any.whl", hash = "sha256:896ba4b99c2da8f3546ef02db32e39d69f4ea75c0e9ed8ae3664bc40bc72c7d8"},
+]
+
+[package.dependencies]
+types-pyasn1 = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "4.6.3"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -1220,4 +1239,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "e239c04a648286d83a94224f028a8581e2192bfeb1f62a031212632e088e81d6"
+content-hash = "669546fb078bf9943e37fa848c95cdf7156c1e46adc1e4f3d732ce684914d68d"
