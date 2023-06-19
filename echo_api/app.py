@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from loguru import logger
 
 from echo_api import database, routers
 
@@ -29,5 +30,7 @@ app.include_router(routers.projects_router, prefix="/projects")
 
 @app.on_event("startup")
 async def startup() -> None:
+    logger.info("EchoAPI started.")
+
     async with database.engine.begin() as conn:
         await conn.run_sync(database.Base.metadata.create_all)
