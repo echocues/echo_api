@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from echo_api import auth, database, schemas
@@ -23,3 +23,17 @@ async def create_user(db: AsyncSession, user: schemas.UserCreate) -> database.Us
     await db.commit()
     await db.refresh(db_user)
     return db_user
+
+
+async def update_user(
+    db: AsyncSession, user_id: int, new_data: schemas.UserUpdate
+) -> database.User:
+    db_user = await db.scalar(
+        update(database.User)
+        .where(database.User.id == user_id)
+        .values(**new_data.dict())
+        .returning(database.User)
+    )
+    await db.commit()
+    await db.refresh(db_user)
+    return db_user  # type: ignore

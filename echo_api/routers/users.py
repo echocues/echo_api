@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from echo_api import crud, database, schemas
+from echo_api import auth, crud, database, schemas
 
 users_router: APIRouter = APIRouter()
 
@@ -14,6 +14,16 @@ async def create_user(
         raise HTTPException(status_code=409, detail="Username already registered")
 
     return await crud.create_user(db=db, user=user)
+
+
+@users_router.put("/", response_model=schemas.User, tags=["users", "update"])
+async def update_user(
+    new_data: schemas.UserUpdate,
+    current_user: auth.user_depends,
+    db: database.db_depends,
+) -> database.User:
+    user = await crud.update_user(db, current_user.id, new_data)
+    return user
 
 
 @users_router.get("/{user_id}", response_model=schemas.User, tags=["users", "get"])
