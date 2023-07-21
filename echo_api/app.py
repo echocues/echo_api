@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
 from echo_api import database, routers
@@ -21,6 +22,15 @@ app = FastAPI(
     description="API to access the EchoCues database.",
     swagger_ui_parameters={"syntaxHighlight.theme": "monokai"},
     openapi_tags=tags_metadata,
+)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(routers.users_router, prefix="/users")
