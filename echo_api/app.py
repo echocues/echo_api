@@ -1,3 +1,5 @@
+import pathlib
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
@@ -41,6 +43,8 @@ app.include_router(routers.projects_router, prefix="/projects")
 @app.on_event("startup")
 async def startup() -> None:
     logger.info("EchoAPI started.")
+
+    pathlib.Path("./projects").mkdir(exist_ok=True)
 
     async with database.engine.begin() as conn:
         await conn.run_sync(database.Base.metadata.create_all)
