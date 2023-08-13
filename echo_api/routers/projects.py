@@ -46,7 +46,7 @@ async def get_project(
 
 
 @projects_router.get(
-    "/file/{project_id}", response_model=schemas.Project, tags=["projects", "get"]
+    "/file/{project_id}", response_class=FileResponse, tags=["projects", "get"]
 )
 async def get_project_file(
     project_id: int, db: database.db_depends, current_user: auth.user_depends
