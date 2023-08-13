@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Sequence
 
+from fastapi import UploadFile
+from fastapi.responses import FileResponse
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -34,3 +36,12 @@ async def create_project(
     await db.commit()
     await db.refresh(db_project)
     return db_project
+
+
+async def read_project_file(project_id: int) -> FileResponse:
+    return FileResponse(f"./projects/{project_id}.json")
+
+
+async def upload_project_file(project_id: int, new_file: UploadFile) -> None:
+    with open(f"./projects/{project_id}.json", "wb") as f:
+        f.write(await new_file.read())
